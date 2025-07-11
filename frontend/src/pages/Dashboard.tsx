@@ -58,9 +58,11 @@ const Dashboard = () => {
     try {
       await axios.delete(`/users/${userId}`);
       fetchUsers();
-    } catch (err: unknown) {
-      if (typeof err === 'object' && err !== null && 'response' in err) {
-        setDeleteError((err as { response?: { data?: { message?: string } } }).response?.data?.message || 'Failed to delete user');
+    } catch (err) {
+      if (err && typeof err === 'object' && 'response' in err) {
+        setDeleteError(
+          (err as { response?: { data?: { message?: string } } }).response?.data?.message || 'Failed to delete user'
+        );
       } else {
         setDeleteError('Failed to delete user');
       }
