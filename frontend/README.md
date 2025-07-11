@@ -1,69 +1,128 @@
-# React + TypeScript + Vite
+# User Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack User Management System built with:
 
-Currently, two official plugins are available:
+## 🛠 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
+- React (Vite, TypeScript)
+- Tailwind CSS
+- React Router DOM
+- Axios (with JWT token interceptor)
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose ODM)
+- JWT for authentication
+- express-validator for validation
+- CORS, dotenv
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Folder Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+assignment-fullstack/
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── config/
+│   ├── .env.example
+│   └── index.js
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── services/
+    │   ├── context/
+    │   ├── App.tsx
+    │   └── main.tsx
+    └── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Features
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Backend
+- User CRUD API (`/api/users`)
+- JWT-based authentication (`/api/auth/login`, `/api/auth/signup`)
+- Server-side pagination & search
+- Input validation with express-validator
+- Protected routes with JWT middleware
+- MongoDB connection via Mongoose
+- CORS for security
+
+### Frontend
+- Login & Signup pages
+- Dashboard with user list, search, pagination
+- Add/Edit user form (modal or page)
+- View user details
+- Delete user
+- Auth context for login/logout state
+- Protected routes (dashboard, user details, etc.)
+- Axios instance with JWT token
+- Responsive UI with Tailwind CSS
+- Loading, error, and empty states
+
+---
+
+## ⚡️ Setup Instructions
+
+### 1. Backend
+1. `cd backend`
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Create a `.env` file (see `.env.example`):
+   ```env
+   MONGO_URI=your_mongo_url
+   JWT_SECRET=your_jwt_secret
+   PORT=5000
+   ```
+4. Start the backend:
+   ```sh
+   npm run dev
+   ```
+
+### 2. Frontend
+1. `cd frontend`
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the frontend:
+   ```sh
+   npm run dev
+   ```
+
+---
+
+## 🌐 API Endpoints
+
+### Auth
+- `POST /api/auth/login` — Login, returns JWT
+- `POST /api/auth/signup` — Signup, returns JWT
+
+### Users (Protected)
+- `GET /api/users` — List users (pagination, search)
+- `GET /api/users/:id` — Get user by ID
+- `POST /api/users` — Add user
+- `PUT /api/users/:id` — Update user
+- `DELETE /api/users/:id` — Delete user
+
+---
+
+## 📝 Notes
+- All protected routes require `Authorization: Bearer <token>` header.
+- Frontend uses Axios interceptor to attach token automatically.
+- Dashboard and user management features are only accessible when logged in.
+
+---
+
+## 👨‍💻 Author
+- Built by [Your Name]
