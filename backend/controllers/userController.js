@@ -11,6 +11,9 @@ export const getUsers = async (req, res) => {
     if (req.query.search) {
       query.name = { $regex: req.query.search, $options: 'i' };
     }
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
 
     // Sort by latest created (descending order of createdAt)
     const users = await UserModel.find(query)

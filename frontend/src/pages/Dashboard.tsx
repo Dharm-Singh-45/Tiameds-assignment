@@ -21,12 +21,13 @@ const Dashboard = () => {
   const [deleteError, setDeleteError] = useState('');
   const navigate = useNavigate();
   const [limit] = useState(5); 
+  const [statusFilter, setStatusFilter] = useState('');
 
   const fetchUsers = async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.get(`/users?page=${page}&search=${search}&limit=${limit}`);
+      const res = await axios.get(`/users?page=${page}&search=${search}&limit=${limit}&status=${statusFilter}`);
       setUsers(res.data.users);
       setTotalPages(res.data.totalPages);   
       setTotal(res.data.total);
@@ -43,7 +44,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchUsers();
     // eslint-disable-next-line
-  }, [page, search]);
+  }, [page, search, statusFilter]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,6 +82,16 @@ const Dashboard = () => {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
+        <select
+          className="border px-3 py-2 rounded"
+          value={statusFilter}
+          onChange={e => { setStatusFilter(e.target.value); setPage(1); }}
+        >
+          <option value="">All</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+          <option value="pending">Pending</option>
+        </select>
         <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Search</button>
       </form>
       <button
