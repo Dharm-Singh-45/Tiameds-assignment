@@ -15,7 +15,6 @@ A full-stack User Management System built with:
 - Express.js
 - MongoDB (Mongoose ODM)
 - JWT for authentication
-- express-validator for validation
 - CORS, dotenv
 
 ---
